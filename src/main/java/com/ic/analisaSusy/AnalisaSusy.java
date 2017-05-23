@@ -1,6 +1,9 @@
 package com.ic.analisaSusy;
 
-import com.google.common.collect.ArrayListMultimap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Multimap;
 import com.ic.analisaSusy.analysis.Analiso;
 import com.ic.analisaSusy.analysis.AnalysisTool;
@@ -8,10 +11,6 @@ import com.ic.analisaSusy.analysis.Metric;
 import com.ic.analisaSusy.analysis.Tool;
 import com.ic.analisaSusy.commons.CLInterface;
 import com.ic.analisaSusy.commons.ParserTool;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -19,21 +18,25 @@ import java.util.Map;
  */
 public class AnalisaSusy {
 
-    public static void main(String[] arguments) {
-        //Read command line arguments and generate data structure 
-        CLInterface aCLI = new CLInterface(arguments);
+    /**
+     * @param arguments
+     *            [-f], [$(SRCDIR)/overview.c], [-cfg], [$(SRCDIR)/config.xml]
+     */
+    public static void main(final String[] arguments) {
+        // Read command line arguments and generate data structure
+        final CLInterface aCLI = new CLInterface(arguments);
         aCLI.parse();
-        List<String> filepaths = aCLI.getFilepaths();
-        String aConfigurationFile = aCLI.getConfigurationFile();
+        final List<String> filepaths = aCLI.getFilepaths();
+        final String aConfigurationFile = aCLI.getConfigurationFile();
 
-        //Parse configuration file and generate selected Metric for each Tool        
-        Multimap<Tool, Metric> metricsPerTool = ParserTool.parseConfigFile(aConfigurationFile);
+        // Parse configuration file and generate selected Metric for each Tool
+        final Multimap<Tool, Metric> metricsPerTool = ParserTool.parseConfigFile(aConfigurationFile);
 
-        //Execute the analysis tool for each Tool using only selected Metrics 
-        Map<Metric, String> analysisOutput = new HashMap<>();
+        // Execute the analysis tool for each Tool using only selected Metrics
+        final Map<Metric, String> analysisOutput = new HashMap<>();
         AnalysisTool analysisTool = null;
-        for (Tool aTool : Tool.values()) {
-            List<Metric> selectedMetrics = (List<Metric>) metricsPerTool.get(aTool);
+        for (final Tool aTool : Tool.values()) {
+            final List<Metric> selectedMetrics = (List<Metric>) metricsPerTool.get(aTool);
             if (aTool.equals(Tool.ANALIZO)) {
                 analysisTool = new Analiso(filepaths, selectedMetrics);
                 analysisTool.runTool();
@@ -46,10 +49,10 @@ public class AnalisaSusy {
             // Add an IF block for each Tool that Analisa-Susy works with
         }
 
-        //Parse each relation metric:value as a formated output
-        String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
+        // Parse each relation metric:value as a formated output
+        final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
 
-        //Output final result
+        // Output final result
         System.out.println(anAnalisaOutput);
     }
 

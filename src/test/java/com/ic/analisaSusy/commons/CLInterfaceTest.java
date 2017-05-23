@@ -29,7 +29,7 @@ public class CLInterfaceTest {
     @Test
     public void testParseOptionCfgFile() {
 
-        final String[] arguments = { "f", "cfgFile" };
+        final String[] arguments = { "-f", "/home/CIT/dmarinho/ANALIZO/t/features/exemplo1.c", "-cfg", "/home/CIT/dmarinho/config.xml" };
         final CLInterface clInterface = new CLInterface(arguments);
         clInterface.parse();
     }

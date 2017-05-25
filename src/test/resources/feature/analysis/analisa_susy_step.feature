@@ -1,11 +1,25 @@
-Feature: Book search 
-	To allow a customer to find his favourite books quickly, the library must offer multiple ways to search for a book.
+# Assumptions: 
+# Input file name "carregados.c"
+# There is only one analysis tool names CCSM
+# If the compilation is successfull, then the uploaded files contain at least the main function.
+# If there is at least one non-empty file, then the analysis tool will be incited.
+# The analysis tool has as input all uploaded files at once
+
+Feature: Run the CCSM component and produce and analysis output 
+	To perform the metrics collection, the component must call the analysis tool passing as input
+	all filenames contained in the input file.
  
-  Scenario: Search books by publication year 
-	Given a book with the title 'One good book', written by 'Anonymous', published in 14 March 2013 
-	And another book with the title 'Some other book', written by 'Tim Tomson', published in 23 August 2014 
-	And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published in 01 January 2012 
-	When the customer searches for books published between 2013 and 2014 
-	Then 2 books should have been found 
-	And Book 1 should have the title 'Some other book' 
-	And Book 2 should have the title 'One good book'
+Scenario: The input file "carregados.c" exists and is not empty, and the analysis output is not empty
+	Given A file containing a list of filenames 
+	When The student uploads a set of files and the compilation is successfull 
+	Then Generate a string containing the concatenation of all files to be analysed 
+	And Run the analysis tool passing all filenames as a single input
+	And Parse the output of the analysis tool
+	And Generate a file containing the analysis result	
+
+Scenario: The input file "carregados.c" exists and is not empty, but the parser fails
+	Given A file containing a list of filenames
+	When The parser outputs an empty file
+	Then The Analisa-SuSy output should send an error flag to the pos-compiling caller
+	And The pos-compiling section should not be exhibit in the consulta.html file
+	 

@@ -1,5 +1,8 @@
 package com.ic.analisaSusy.commons;
 
+import com.google.common.collect.Multimap;
+import com.ic.analisaSusy.analysis.Metric;
+import com.ic.analisaSusy.analysis.Tool;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +24,7 @@ public class CLInterface {
     private String[] arguments;
     private Options options;
     private List<String> filepaths;
-    private String configurationFile;
+    private Multimap<Tool, Metric> metricsPerTool;
 
     public CLInterface(String[] arguments) {
         this.arguments = arguments;
@@ -31,9 +34,7 @@ public class CLInterface {
     }
 
     private void createOptions() {
-        Option anOption = new Option("f", "file", true, "Path(s) of file(s) to analyse.");
-        anOption.setArgs(Option.UNLIMITED_VALUES);
-        this.options.addOption(anOption);
+        this.options.addOption("f", "file", true, "Text file with code filepaths to analise.");
         this.options.addOption("cfg", "cfgFile", true, "Configuration file");
         this.options.addOption("h", "help", false, "Show help");
     }
@@ -41,16 +42,21 @@ public class CLInterface {
     public void parse() {
         CommandLineParser aParser = new DefaultParser();
         CommandLine aCommandLine = null;
+        String aConfigurationFile = null;
         try {
             aCommandLine = aParser.parse(this.options, this.arguments);
             if (aCommandLine.hasOption("h")) {
                 help();
-            } else if (aCommandLine.hasOption("f") && aCommandLine.hasOption("cfg")) {
-                this.filepaths = Arrays.asList(aCommandLine.getOptionValues("f"));
-                this.configurationFile = aCommandLine.getOptionValue("cfg");
+            } else if (aCommandLine.hasOption("f")) {
+                this.filepaths = ParserTool.parseFilepaths(aCommandLine.getOptionValue("f"));
+                if (aCommandLine.hasOption("cfg")) {
+                    aConfigurationFile = aCommandLine.getOptionValue("cfg");
+                }
+                this.metricsPerTool = ParserTool.parseConfigFile(aConfigurationFile);
             } else {
-                System.err.println("Missing CLI arguments");
+                System.err.println("Missing file (-f) argument");
             }
+
         } catch (ParseException anException) {
             Logger.getLogger(CLInterface.class.getName()).log(Level.SEVERE, null, anException);
         }
@@ -63,8 +69,8 @@ public class CLInterface {
         return this.filepaths;
     }
 
-    public String getConfigurationFile() {
-        return this.configurationFile;
+    public Multimap<Tool, Metric> getMetricsPerTool() {
+        return this.metricsPerTool;
     }
 
 }

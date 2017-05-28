@@ -5,7 +5,11 @@ package com.ic.analisaSusy.analysis;
  * @author Marcelo C. Araújo
  */
 public enum Metric {
-    NUM_LINES(Tool.ANALIZO, "NML"), A(Tool.TOOL2, "AAA");
+    FOR_C(Tool.CCSM, "KW_FOR_CNT"), 
+    IF_C(Tool.CCSM, "KW_IF_CNT"), 
+    WHILE_C(Tool.CCSM, "KW_WHILE_CNT"), 
+    RETURN_C(Tool.CCSM, "KW_RETURN_CNT"), 
+    HALSTEAD(Tool.CCSM, "HALSTEAD_*");
 
     private Tool tool;
     private final String toolCode;
@@ -21,6 +25,10 @@ public enum Metric {
 
     public Tool getTool() {
         return this.tool;
+    }
+
+    public String getToolCode() {
+        return toolCode;
     }
 
 }

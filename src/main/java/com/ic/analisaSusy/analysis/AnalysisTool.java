@@ -17,18 +17,19 @@ public abstract class AnalysisTool {
 
     protected List<String> filepaths;
     protected List<Metric> metrics;
-    protected Map<Metric, String> output;
+    //protected Map<Metric, String> output;
+    protected String output;
 
     public AnalysisTool(final List<String> filepaths, final List<Metric> metrics) {
         this.filepaths = filepaths;
         this.metrics = metrics;
-        this.output = new HashMap<>();
+        //this.output = new HashMap<>();
+        String output = "";
     }
 
     public void runTool() {
         final String aCommand = this.parseCommand();
         final ShellInterface aShell = new ShellInterface();
-
         try {
             aShell.executeCommand(aCommand);
         } catch (final IOException ex) {
@@ -38,8 +39,24 @@ public abstract class AnalysisTool {
         this.parseOutput(aShell.getOutput());
     }
 
-    public Map<Metric, String> getOutput() {
+    public String getOutput() {
         return this.output;
+    }
+
+    protected String metricsToString(List<Metric> metrics, String aSeparatorToken) {
+        String aStringResult = "";
+        for (Metric aMetric : metrics) {
+            aStringResult += aMetric.getToolCode() + aSeparatorToken;
+        }
+        return aStringResult.substring(0, aStringResult.length()-1);
+    }
+
+    protected String filesToString(List<String> files, String aSeparatorToken) {
+        String aStringResult = "";
+        for (String aFilepath : files) {
+            aStringResult += aFilepath + aSeparatorToken;
+        }
+        return aStringResult;
     }
 
     protected abstract void parseOutput(String anOutput);

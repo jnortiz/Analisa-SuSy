@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ShellInterface {
 
-    private String output;
+    private String output="";
     
     public void executeCommand(String aCommand) throws IOException {
 
@@ -33,7 +33,7 @@ public class ShellInterface {
             aBufferedReader = new BufferedReader(anInputStreamReader);
             String aLine = null;            
             while ((aLine = aBufferedReader.readLine()) != null) {
-                this.output += aLine;
+                this.output += aLine+System.getProperty("line.separator");
             }
         } catch (IOException anException) {
             System.err.println("Error executing command");

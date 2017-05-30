@@ -28,7 +28,7 @@ public class AnalisaSusy {
         aCLI.parse();
         final List<String> filepaths = aCLI.getFilepaths();
         final Multimap<Tool, Metric> metricsPerTool = aCLI.getMetricsPerTool();
-
+       
         // Execute the analysis tool for each Tool using only selected Metrics
         final Map<Metric, String> analysisOutput = new HashMap<>();
         AnalysisTool analysisTool = null;

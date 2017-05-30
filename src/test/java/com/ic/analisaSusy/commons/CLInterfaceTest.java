@@ -9,6 +9,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import com.google.common.collect.Multimap;
+import com.ic.analisaSusy.analysis.Metric;
+import com.ic.analisaSusy.analysis.Tool;
+
 /**
  * @author dmarinho
  *
@@ -56,7 +60,7 @@ public class CLInterfaceTest {
 
         final String[] arguments = { "a", "b", "c" };
         final CLInterface clInterface = new CLInterface(arguments);
-        final String configurationFile = clInterface.getConfigurationFile();
+        final Multimap<Tool, Metric> configurationFile = clInterface.getMetricsPerTool();
         assertNull(configurationFile);
     }
 

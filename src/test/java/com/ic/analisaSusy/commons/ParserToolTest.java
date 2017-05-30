@@ -28,14 +28,14 @@ public class ParserToolTest {
     @Test
     public void testParseAnalisaOutputWithMetricNumLines() {
 
-        final String output = ParserTool.parseAnalisaOutput(teste(Metric.NUM_LINES, "100"));
+        final String output = ParserTool.parseAnalisaOutput(teste(Metric.CASE_C, "100"));
         assertNull(output);
     }
 
     @Test
     public void testParseAnalisaOutputWithMetricA() {
 
-        final String output = ParserTool.parseAnalisaOutput(teste(Metric.A, "370"));
+        final String output = ParserTool.parseAnalisaOutput(teste(Metric.BREAK_C, "370"));
         assertNull(output);
     }
 

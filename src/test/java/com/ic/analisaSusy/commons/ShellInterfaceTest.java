@@ -1,6 +1,6 @@
 package com.ic.analisaSusy.commons;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doThrow;
 
 import java.io.IOException;
@@ -38,6 +38,6 @@ public class ShellInterfaceTest {
 
         final ShellInterface shellInterface = new ShellInterface();
         final String output = shellInterface.getOutput();
-        assertNull(output);
+        assertNotNull(output);
     }
 }

@@ -35,6 +35,7 @@ public class analisa_susy_step {
     	this.arguments[1] = "carregados.txt";
     }
     
+    
 	/* Scenario: The input file "carregados.c" exists and is not empty, and the analysis output is not empty */
     @Given("^A file containing a list of filenames$")
     public void receiveFile() {

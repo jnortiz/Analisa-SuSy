@@ -16,12 +16,19 @@ import org.junit.Test;
  */
 public class AnalisoTest {
 
+    private static final String SEPARATOR_TOKEN = "#";
+
+    private static final String FILE_PATH_OUTPUT = "/bin/output";
+
+    private static final String FILE_PATH_INPUT = "/bin/input/list_of_algorithms";
+
     private static Analiso analiso;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+
         // GIVEN a analise event
-        analiso = new Analiso(Arrays.asList("/bin/input/list_of_algorithms"),
+        analiso = new Analiso(Arrays.asList(FILE_PATH_INPUT),
                 Arrays.asList(Metric.FUNC_C, Metric.CASE_C, Metric.BREAK_C, Metric.GOTO_C, Metric.CONTINUE_C, Metric.VAR_FILE_LOC_C, Metric.RETURN_POINT_C,
                         Metric.CMNT_DENS, Metric.CC, Metric.UNQ_FUNC_CALL, Metric.PARAM_PER_FUNC, Metric.NESTING_FUNC_C, Metric.HAL_VOC, Metric.HAL_LEN,
                         Metric.HAL_CALC_LEN, Metric.HAL_D));
@@ -30,7 +37,20 @@ public class AnalisoTest {
     @Test
     public void testParseCommand() {
 
-        // WHEN parse command efect
+        // WHEN parse command effect
+        final String parseCommand = analiso.parseCommand();
+
+        // THEN parse command will be executed
+        assertNull(parseCommand);
+    }
+
+    @Test
+    public void testExecuteSpecificParseCommand() {
+
+        // GIVEN a analysis event
+        analiso = new Analiso(Arrays.asList(FILE_PATH_INPUT), Arrays.asList(Metric.PARAM_PER_FUNC));
+
+        // WHEN parse command effect
         final String parseCommand = analiso.parseCommand();
 
         // THEN parse command will be executed
@@ -40,26 +60,20 @@ public class AnalisoTest {
     @Test
     public void testParseOutput() {
 
-        // WHEN parse command efect
-        analiso.parseOutput("/bin/output");
-
-        // THEN parse command will be executed
+        analiso.parseOutput(FILE_PATH_OUTPUT);
     }
 
     @Ignore
     @Test
     public void testRunTool() {
 
-        // WHEN parse command efect
         analiso.runTool();
-
-        // THEN parse command will be executed
     }
 
     @Test
     public void testGetOutput() {
 
-        // WHEN parse command efect
+        // WHEN parse command effect
         final String output = analiso.getOutput();
 
         // THEN parse command will be executed
@@ -69,12 +83,13 @@ public class AnalisoTest {
     @Test
     public void testMetricsToString() {
 
+        // GIVEN a metrics
         final List<Metric> metrics = Arrays.asList(Metric.FUNC_C, Metric.CASE_C, Metric.BREAK_C, Metric.GOTO_C, Metric.CONTINUE_C, Metric.VAR_FILE_LOC_C,
                 Metric.RETURN_POINT_C, Metric.CMNT_DENS, Metric.CC, Metric.UNQ_FUNC_CALL, Metric.PARAM_PER_FUNC, Metric.NESTING_FUNC_C, Metric.HAL_VOC,
                 Metric.HAL_LEN, Metric.HAL_CALC_LEN, Metric.HAL_D);
 
-        // WHEN parse command efect
-        final String output = analiso.metricsToString(metrics, "#");
+        // WHEN parse command effect
+        final String output = analiso.metricsToString(metrics, SEPARATOR_TOKEN);
 
         // THEN parse command will be executed
         assertNotNull(output);
@@ -83,10 +98,11 @@ public class AnalisoTest {
     @Test
     public void testFilesToString() {
 
+        // GIVEN a files path list
         final List<String> files = Arrays.asList("/bin/input/algorithm_1.c", "/bin/input/algorithm_2.c", "/bin/input/algorithm_3.h");
 
-        // WHEN parse command efect
-        final String output = analiso.filesToString(files, "#");
+        // WHEN parse command effect
+        final String output = analiso.filesToString(files, SEPARATOR_TOKEN);
 
         // THEN parse command will be executed
         assertNotNull(output);

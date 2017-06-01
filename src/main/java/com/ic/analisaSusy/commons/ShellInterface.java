@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ShellInterface {
 
-    private String output="";
+    private String output = "";
     
     public void executeCommand(String aCommand) throws IOException {
 
@@ -22,6 +22,7 @@ public class ShellInterface {
         commands.add("/bin/bash");
         commands.add("-c");
         commands.add(aCommand);
+        System.out.println(aCommand);
 
         BufferedReader aBufferedReader = null;
 

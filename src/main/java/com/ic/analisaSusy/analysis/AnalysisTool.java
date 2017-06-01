@@ -24,7 +24,7 @@ public abstract class AnalysisTool {
         this.filepaths = filepaths;
         this.metrics = metrics;
         //this.output = new HashMap<>();
-        String output = "";
+        //String output = "";
     }
 
     public void runTool() {
@@ -35,7 +35,6 @@ public abstract class AnalysisTool {
         } catch (final IOException ex) {
             Logger.getLogger(AnalysisTool.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         this.parseOutput(aShell.getOutput());
     }
 

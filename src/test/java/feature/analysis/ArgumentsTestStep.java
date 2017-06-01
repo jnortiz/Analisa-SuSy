@@ -17,7 +17,7 @@ public class ArgumentsTestStep {
     public void correctArgumentsAsInput() {
         arguments = new String[2];
         arguments[0] = "-f";
-        arguments[1] = "overview.c";
+        arguments[1] = "src/test/resources/Files/carregados.txt";
         Assert.assertTrue(arguments.length == 2);
     }
 
@@ -30,7 +30,7 @@ public class ArgumentsTestStep {
     @Then("^Analisa-SuSy won't return an error message$")
     public void analisaSuSyWontReturnErrorMessage() {
         aCLI.parse();
-        Assert.assertFalse(aCLI.getFilepaths().size() > 0);
+        Assert.assertTrue(aCLI.getFilepaths().size() > 0);
     }
 
     @Given("^0 arguments as input for Analisa-SuSy$")
@@ -47,7 +47,11 @@ public class ArgumentsTestStep {
 
     @Then("^Analisa-SuSy will return an error message$")
     public void analisaSuSyWillReturnErrorMessage() {
-        aCLI.parse();
+    	try{
+    		aCLI.parse();
+    	} catch (Exception e) {
+
+		}
         Assert.assertTrue(aCLI.getFilepaths().size() == 0);
     }
 

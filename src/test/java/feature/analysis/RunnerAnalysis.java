@@ -6,11 +6,11 @@ import cucumber.api.junit.Cucumber;
 
 @CucumberOptions(
 		features={"src/test/resources/feature/analysis"},
-		glue={"cukes"},
 		plugin = {"pretty",
 				"html:target/cucumber-html-report",
 				"junit:target/cucumber-junit-report/allcukes.xml"},
-		tags = {"@Runme"}
+		tags = {"@Runme"},
+        glue = {"feature.analysis"}
 )
 
 @RunWith(Cucumber.class)

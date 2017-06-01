@@ -10,7 +10,6 @@ import com.ic.analisaSusy.analysis.Ccsm;
 import com.ic.analisaSusy.analysis.Metric;
 import com.ic.analisaSusy.analysis.Tool;
 import com.ic.analisaSusy.commons.CLInterface;
-import com.ic.analisaSusy.commons.ParserTool;
 
 /**
  *
@@ -29,8 +28,17 @@ public class AnalisaSusy {
         final List<String> filepaths = aCLI.getFilepaths();
         final Multimap<Tool, Metric> metricsPerTool = aCLI.getMetricsPerTool();
        
+        String anOutput = runAnalysis(metricsPerTool, filepaths);
+        // Parse each relation metric:value as a formated output
+        //final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
+
+        // Output final result
+        System.out.println(anOutput);
+    }
+
+    public static String runAnalysis(Multimap<Tool, Metric> metricsPerTool, List<String> filepaths) {
         // Execute the analysis tool for each Tool using only selected Metrics
-        final Map<Metric, String> analysisOutput = new HashMap<>();
+        //final Map<Metric, String> analysisOutput = new HashMap<>();
         AnalysisTool analysisTool = null;
         String anOutput = null;
         for (final Tool aTool : Tool.values()) {
@@ -43,12 +51,6 @@ public class AnalisaSusy {
             }
             // Add an IF block for each Tool that Analisa-Susy works with
         }
-
-        // Parse each relation metric:value as a formated output
-        final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
-
-        // Output final result
-        System.out.println(anOutput);
+        return anOutput;
     }
-
 }

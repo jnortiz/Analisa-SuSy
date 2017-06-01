@@ -35,7 +35,6 @@ public abstract class AnalysisTool {
         } catch (final IOException ex) {
             Logger.getLogger(AnalysisTool.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         this.parseOutput(aShell.getOutput());
     }
 

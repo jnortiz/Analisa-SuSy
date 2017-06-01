@@ -17,24 +17,22 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 public class AnalisaSusyStep {
 	
-	private Multimap<Tool, Metric> metricsPerTool;
-	private String[] arguments = {"-f", "src/test/resources/Files/carregados.txt"};
+    private Multimap<Tool, Metric> metricsPerTool;
+    private String[] arguments;
     private CLInterface aCLI;
     private List<String> filepaths;
     private String anOutput;
 
-    /*
     private void setArgumments() {
     	arguments = new String[2];
     	arguments[0] = "-f";
-    	arguments[1] = "src/test/resources/Files/carregados.txt";
+    	arguments[1] = "/home/jnortiz/git/Analisa-SuSy/carregados.txt";
     }
-    */
         
 	/* Scenario: The input file "carregados.txt" exists and is not empty, and the analysis output is not empty */
     @Given("^A file containing a list of filenames$")
     public void receiveFile() throws Throwable {
-    	//this.setArgumments();
+    	this.setArgumments();
     	File file = new File(arguments[1]);
     	Assert.assertNotNull(file);
     }
@@ -42,7 +40,7 @@ public class AnalisaSusyStep {
     @When("^Analisa-SuSy was called by SuSy$")
     public void AnalisaSuSyWasCalled() throws Throwable {
     	aCLI = new CLInterface(arguments);
-        Assert.assertTrue(aCLI.getFilepaths().size() == 0);
+        Assert.assertTrue(aCLI.getFilepaths().isEmpty());
     }    
     
     @Then("^Generate a string containing the concatenation of all files to be analysed$")
@@ -53,7 +51,7 @@ public class AnalisaSusyStep {
     }
     
     @And("^Run the analysis tool passing all filenames as a single input$")
-    public void callAnalysisTool() throws Throwable {
+    public void callAnalysisTool() throws Throwable {    	
     	this.metricsPerTool = aCLI.getMetricsPerTool();
         anOutput = AnalisaSusy.runAnalysis(metricsPerTool, filepaths);
         Assert.assertNotNull(anOutput);
@@ -66,7 +64,7 @@ public class AnalisaSusyStep {
     }
     
     public void setAnOutput(String anOutput) {
-		this.anOutput = anOutput;
-	}
+	this.anOutput = anOutput;
+    }
     	        
 }

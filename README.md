@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jnortiz/Analisa-SuSy.png?label=ready&title=Ready)](https://waffle.io/jnortiz/Analisa-SuSy?utm_source=badge)
 # Analisa-SuSy
 Integration of a software component for software metrics into the SuSy (Submission System).
 

@@ -1,18 +1,26 @@
-Feature: Receive arguments from command line
+Feature: Receive arguments from command line.
+It is expected the arguments to be -f and a filename containing paths to C source codes.
 
-Scenario: All arguments are correct
-Given The correct arguments as input for Analisa-SuSy
+Scenario: All arguments are correct.
+ 
+Given The -f and a filename as input for Analisa-SuSy
 When SuSy calls Analisa-SuSy
-Then Analisa-SuSy won't return an error message
+Then Open the file given as input
 
-#@Runme
-Scenario: Without any argument
+Scenario: Without any argument.
+
 Given 0 arguments as input for Analisa-SuSy
 When SuSy calls Analisa-SuSy using 0 arguments
-Then Analisa-SuSy will return an error message
+Then Throw a message saying the arguments are missing.
 
-#@Runme
-Scenario: Without file path
-Given f option as argument
-When SuSy calls Analisa-SuSy using just 1 argument
-Then Analisa-SuSy will return an error message
+Scenario: Without file path.
+
+Given The list of parameters
+When SuSy calls Analisa-SuSy using just the -f argument
+Then Analisa-SuSy will return an error message asking for a filename.
+
+Scenario: Without -f option.
+
+Given The list of parameters
+When SuSy calls Analisa-SuSy passing only a filename as argument
+Then Throw a message saying the -f option is missing.

@@ -15,14 +15,16 @@ import java.util.List;
 public class ShellInterface {
 
     private String output = "";
-    
+
     public void executeCommand(String aCommand) throws IOException {
 
         List<String> commands = new ArrayList<>();
         commands.add("/bin/bash");
         commands.add("-c");
+        // commands.add("cmd.exe");
+        //commands.add("/c");
         commands.add(aCommand);
-        System.out.println(aCommand);
+        // System.out.println(aCommand);
 
         BufferedReader aBufferedReader = null;
 
@@ -32,12 +34,12 @@ public class ShellInterface {
             InputStream anInputStream = aProcess.getInputStream();
             InputStreamReader anInputStreamReader = new InputStreamReader(anInputStream);
             aBufferedReader = new BufferedReader(anInputStreamReader);
-            String aLine = null;            
+            String aLine = null;
             while ((aLine = aBufferedReader.readLine()) != null) {
-                this.output += aLine+System.getProperty("line.separator");
+                this.output += aLine + System.getProperty("line.separator");
             }
         } catch (IOException anException) {
-            System.err.println("Error executing command");
+            //System.err.println("Error executing command");
             throw anException;
         } finally {
             secureClose(aBufferedReader);

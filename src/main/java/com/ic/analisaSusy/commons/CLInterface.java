@@ -1,8 +1,11 @@
 package com.ic.analisaSusy.commons;
 
 import com.google.common.collect.Multimap;
+import com.ic.analisaSusy.AnalisaSusy;
 import com.ic.analisaSusy.analysis.Metric;
 import com.ic.analisaSusy.analysis.Tool;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,30 +42,25 @@ public class CLInterface {
         this.options.addOption("h", "help", false, "Show help");
     }
 
-    public void parse() {
+    public void parse() throws ParseException {
         CommandLineParser aParser = new DefaultParser();
         CommandLine aCommandLine = null;
         String aConfigurationFile = null;
-        try {
-            aCommandLine = aParser.parse(this.options, this.arguments);
-            if (aCommandLine.hasOption("h")) {
-                help();
-            } else if (aCommandLine.hasOption("f")) {
+        aCommandLine = aParser.parse(this.options, this.arguments);
+        if (aCommandLine.hasOption("f")) {
+            try {
                 this.filepaths = ParserTool.parseFilepaths(aCommandLine.getOptionValue("f"));
                 if (aCommandLine.hasOption("cfg")) {
                     aConfigurationFile = aCommandLine.getOptionValue("cfg");
                 }
                 this.metricsPerTool = ParserTool.parseConfigFile(aConfigurationFile);
-            } else {
-                System.err.println("Missing file (-f) argument");
+            } catch (IOException anIOException) {
+                throw new ParseException("Erro na leitura do arquivo de entrada");
             }
-
-        } catch (ParseException anException) {
-            Logger.getLogger(CLInterface.class.getName()).log(Level.SEVERE, null, anException);
+        } else {
+            AnalisaSusy.errors.put(ApplicationError.NF_FILE_ARG, "");
+            throw new ParseException("O paramêtro obrigatório -f não foi encontrado");
         }
-    }
-
-    private void help() {
     }
 
     public List<String> getFilepaths() {

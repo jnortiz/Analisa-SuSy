@@ -1,15 +1,17 @@
 package com.ic.analisaSusy;
 
-import java.util.HashMap;
+import com.google.common.collect.ArrayListMultimap;
 import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Multimap;
 import com.ic.analisaSusy.analysis.AnalysisTool;
 import com.ic.analisaSusy.analysis.Ccsm;
 import com.ic.analisaSusy.analysis.Metric;
 import com.ic.analisaSusy.analysis.Tool;
+import com.ic.analisaSusy.commons.ApplicationError;
 import com.ic.analisaSusy.commons.CLInterface;
+import com.ic.analisaSusy.commons.ErrorChecking;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,23 +19,33 @@ import com.ic.analisaSusy.commons.CLInterface;
  */
 public class AnalisaSusy {
 
+    public static Multimap<ApplicationError, String> errors = ArrayListMultimap.create();
+
     /**
      * @param arguments [-f], [$(SRCDIR)/overview.c], [-cfg],
      * [$(SRCDIR)/config.xml]
      */
     public static void main(final String[] arguments) {
-        // Read command line arguments and generate data structure
-        final CLInterface aCLI = new CLInterface(arguments);
-        aCLI.parse();
-        final List<String> filepaths = aCLI.getFilepaths();
-        final Multimap<Tool, Metric> metricsPerTool = aCLI.getMetricsPerTool();
-       
-        String anOutput = runAnalysis(metricsPerTool, filepaths);
-        // Parse each relation metric:value as a formated output
-        //final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
+        String anOutput = "";
+        try {
+            // Read command line arguments and generate data structure
+            ErrorChecking.verifyCCSM();
+            final CLInterface aCLI = new CLInterface(arguments);
+            aCLI.parse();
+            final List<String> filepaths = aCLI.getFilepaths();
+            final Multimap<Tool, Metric> metricsPerTool = aCLI.getMetricsPerTool();
 
-        // Output final result
-        System.out.println(anOutput);
+            anOutput = runAnalysis(metricsPerTool, filepaths);
+            // Parse each relation metric:value as a formated output
+            //final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
+
+            // Output final result
+        } catch (Exception ex) {
+            //formata o map de erro
+        } finally {
+            System.out.println(errors);
+            System.out.println(anOutput);
+        }
     }
 
     public static String runAnalysis(Multimap<Tool, Metric> metricsPerTool, List<String> filepaths) {

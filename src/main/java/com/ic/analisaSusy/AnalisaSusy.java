@@ -11,6 +11,11 @@ import com.ic.analisaSusy.commons.ApplicationError;
 import com.ic.analisaSusy.commons.CLInterface;
 import com.ic.analisaSusy.commons.ErrorChecking;
 import com.ic.analisaSusy.commons.ParserTool;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  *
@@ -55,19 +60,20 @@ public class AnalisaSusy {
 
     public static String runAnalysis(Multimap<Tool, Metric> metricsPerTool, List<String> filepaths) {
         // Execute the analysis tool for each Tool using only selected Metrics
-        //final Map<Metric, String> analysisOutput = new HashMap<>();
+        Map<Metric, String> analysisOutput = new HashMap<>();
         AnalysisTool analysisTool = null;
         String anOutput = null;
+        LinkedHashMap<String, LinkedHashMap<Metric, String>> structuredOutput = null;
         for (final Tool aTool : Tool.values()) {
             final List<Metric> selectedMetrics = (List<Metric>) metricsPerTool.get(aTool);
             if (aTool.equals(Tool.CCSM)) {
                 analysisTool = new Ccsm(filepaths, selectedMetrics);
                 analysisTool.runTool();
-                anOutput = analysisTool.getOutput();
+                structuredOutput = analysisTool.parseOutput();
                 //analysisOutput.putAll(analysisTool.getOutput());
             }
             // Add an IF block for each Tool that Analisa-Susy works with
         }
-        return anOutput;
+        return ParserTool.generateOutput(structuredOutput);
     }
 }

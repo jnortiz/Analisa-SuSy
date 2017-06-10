@@ -1,13 +1,12 @@
 package com.ic.analisaSusy.analysis;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ic.analisaSusy.commons.ShellInterface;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -17,14 +16,12 @@ public abstract class AnalysisTool {
 
     protected List<String> filepaths;
     protected List<Metric> metrics;
-    //protected Map<Metric, String> output;
     protected String output;
 
     public AnalysisTool(final List<String> filepaths, final List<Metric> metrics) {
         this.filepaths = filepaths;
         this.metrics = metrics;
-        //this.output = new HashMap<>();
-        //String output = "";
+        this.output = "";
     }
 
     public void runTool() {
@@ -35,7 +32,7 @@ public abstract class AnalysisTool {
         } catch (final IOException ex) {
             Logger.getLogger(AnalysisTool.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.parseOutput(aShell.getOutput());
+        this.output = aShell.getOutput();
     }
 
     public String getOutput() {
@@ -47,7 +44,7 @@ public abstract class AnalysisTool {
         for (Metric aMetric : metrics) {
             aStringResult += aMetric.getToolCode() + aSeparatorToken;
         }
-        return aStringResult.substring(0, aStringResult.length()-1);
+        return aStringResult.substring(0, aStringResult.length() - 1);
     }
 
     protected String filesToString(List<String> files, String aSeparatorToken) {
@@ -58,7 +55,7 @@ public abstract class AnalysisTool {
         return aStringResult;
     }
 
-    protected abstract void parseOutput(String anOutput);
+    public abstract LinkedHashMap<String, LinkedHashMap<Metric, String>> parseOutput();
 
     protected abstract String parseCommand();
 

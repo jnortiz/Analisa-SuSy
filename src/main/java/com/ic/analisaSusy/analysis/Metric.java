@@ -47,4 +47,13 @@ public enum Metric {
         return toolCode;
     }
 
+    public static Metric getEnum(String aValue) {
+        for (Metric aMetric : Metric.values()) {
+            if (aMetric.getToolCode().equals(aValue)) {
+                return aMetric;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
 }

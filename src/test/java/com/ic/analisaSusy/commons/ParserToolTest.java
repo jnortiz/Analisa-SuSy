@@ -28,15 +28,15 @@ public class ParserToolTest {
     @Test
     public void testParseAnalisaOutputWithMetricNumLines() {
 
-        final String output = ParserTool.parseAnalisaOutput(teste(Metric.CASE_C, "100"));
-        assertNull(output);
+        //final String output = ParserTool.parseAnalisaOutput(teste(Metric.CASE_C, "100"));
+      //  assertNull(output);
     }
 
     @Test
     public void testParseAnalisaOutputWithMetricA() {
 
-        final String output = ParserTool.parseAnalisaOutput(teste(Metric.BREAK_C, "370"));
-        assertNull(output);
+       // final String output = ParserTool.parseAnalisaOutput(teste(Metric.BREAK_C, "370"));
+       // assertNull(output);
     }
 
     private Map<Metric, String> teste(final Metric metric, final String value) {

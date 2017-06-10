@@ -6,14 +6,20 @@ import com.google.common.collect.Multiset;
 import com.ic.analisaSusy.AnalisaSusy;
 import com.ic.analisaSusy.analysis.Metric;
 import com.ic.analisaSusy.analysis.Tool;
+import com.sun.javafx.font.Metrics;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,8 +61,16 @@ public class ParserTool {
 
     }
 
-    public static String parseAnalisaOutput(Map<Metric, String> analysisOutput) {
-        return null;
+    public static String generateOutput(LinkedHashMap<String, LinkedHashMap<Metric, String>> structuredOutput) {
+        StringBuilder aStringBuilder = new StringBuilder();
+        for (String aFunction : structuredOutput.keySet()) {
+            aStringBuilder.append("Função:" + aFunction + System.getProperty("line.separator"));
+            HashMap<Metric, String> byFunctionOutput = structuredOutput.get(aFunction);
+            for (Metric aMetric : byFunctionOutput.keySet()) {
+                aStringBuilder.append("\t" + aMetric.getToolCode() + " = " + byFunctionOutput.get(aMetric) + System.getProperty("line.separator"));
+            }
+        }
+        return aStringBuilder.toString().replace("Função:Global", "Global");
     }
 
     public static String parseErrors(Multimap<ApplicationError, String> errors) {

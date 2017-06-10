@@ -10,8 +10,7 @@ import com.ic.analisaSusy.analysis.Tool;
 import com.ic.analisaSusy.commons.ApplicationError;
 import com.ic.analisaSusy.commons.CLInterface;
 import com.ic.analisaSusy.commons.ErrorChecking;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.ic.analisaSusy.commons.ParserTool;
 
 /**
  *
@@ -27,6 +26,7 @@ public class AnalisaSusy {
      */
     public static void main(final String[] arguments) {
         String anOutput = "";
+        String anErrorOutput = "";
         try {
             // Read command line arguments and generate data structure
             ErrorChecking.verifyCCSM();
@@ -39,11 +39,16 @@ public class AnalisaSusy {
             // Parse each relation metric:value as a formated output
             //final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
 
-            // Output final result
         } catch (Exception ex) {
-            //formata o map de erro
+            anErrorOutput = "Erros foram encontrados:" + System.clearProperty("line.separator");
         } finally {
-            System.out.println(errors);
+            if (anErrorOutput.isEmpty() && !errors.isEmpty()) {
+                anErrorOutput = "Aviso(s):" + System.getProperty("line.separator");
+            }
+            if (!errors.isEmpty()) {
+                anErrorOutput += ParserTool.parseErrors(AnalisaSusy.errors);
+            }
+            System.out.println(anErrorOutput);
             System.out.println(anOutput);
         }
     }

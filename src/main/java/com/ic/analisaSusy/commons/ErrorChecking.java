@@ -44,7 +44,7 @@ public class ErrorChecking {
                 validFiles.add(file);
             } else {
                 String[] splits = file.split(File.separator);
-                AnalisaSusy.errors.put(ApplicationError.NF_CODE, splits[splits.length - 1]);
+                AnalisaSusy.errors.put(ApplicationError.INVALID_EXT, splits[splits.length - 1]);
             }
         }
         if (!anyValidExtension) {

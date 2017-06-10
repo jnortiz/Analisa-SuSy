@@ -2,6 +2,7 @@ package com.ic.analisaSusy.commons;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 import com.ic.analisaSusy.AnalisaSusy;
 import com.ic.analisaSusy.analysis.Metric;
 import com.ic.analisaSusy.analysis.Tool;
@@ -13,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.transform.Affine;
 
 /**
  *
@@ -57,5 +57,22 @@ public class ParserTool {
 
     public static String parseAnalisaOutput(Map<Metric, String> analysisOutput) {
         return null;
+    }
+
+    public static String parseErrors(Multimap<ApplicationError, String> errors) {
+        StringBuilder aStringBuilder = new StringBuilder();
+        List<String> identifiedErrors;
+        String anErrorTemplate;
+        for (ApplicationError anApplicationError : errors.keySet()) {
+            identifiedErrors = (List<String>) errors.get(anApplicationError);
+            for (String anErrorObject : identifiedErrors) {
+                anErrorTemplate = anApplicationError.getErrorMessage();
+                anErrorTemplate = String.format(anErrorTemplate, anErrorObject);
+                aStringBuilder.append("\t");
+                aStringBuilder.append(anErrorTemplate);
+                aStringBuilder.append(System.getProperty("line.separator"));
+            }
+        }
+        return aStringBuilder.toString();
     }
 }

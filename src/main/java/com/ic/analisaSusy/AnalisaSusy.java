@@ -40,7 +40,7 @@ public class AnalisaSusy {
             //final String anAnalisaOutput = ParserTool.parseAnalisaOutput(analysisOutput);
 
         } catch (Exception ex) {
-            anErrorOutput = "Erros foram encontrados:" + System.clearProperty("line.separator");
+            anErrorOutput = "Erros foram encontrados:" + System.getProperty("line.separator");
         } finally {
             if (anErrorOutput.isEmpty() && !errors.isEmpty()) {
                 anErrorOutput = "Aviso(s):" + System.getProperty("line.separator");

@@ -1,6 +1,5 @@
 package com.ic.analisaSusy.commons;
 
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
 import org.apache.commons.cli.CommandLineParser;
@@ -9,59 +8,68 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import com.google.common.collect.Multimap;
-import com.ic.analisaSusy.analysis.Metric;
-import com.ic.analisaSusy.analysis.Tool;
-
 /**
  * @author dmarinho
  *
  */
 public class CLInterfaceTest {
 
+    private static final String PARAMETER_FILE_CONFIG = "-cfg";
+
+    private static final String PARAMETER_FILE_NONEXISTENT = "a";
+
+    private static final String PARAMETER_FILE = "-f";
+
+    private static final String PATH_FILE = "/Files/carregados.txt";
+
+    private static final String PATH_FILE_CONFIG = "/home/CIT/dmarinho/config.xml";
+
+    private static final String PATH_FILE_NONEXISTENT = "/arquivoInexistente.txt";
+
     @Mock
     private CommandLineParser commandLineParserMock;
 
-    @Test
-    public void testParseOptionHelp() {
+    @Test(expected = ParseException.class)
+    public void testParseOptionFileNotFoundException() throws ParseException {
 
-        final String[] arguments = { "-h" };
+        final String[] arguments = { PARAMETER_FILE, PATH_FILE_NONEXISTENT };
         final CLInterface clInterface = new CLInterface(arguments);
         clInterface.parse();
     }
 
     @Test
-    public void testParseOptionCfgFile() {
+    public void testParseOptionFile() throws ParseException {
 
-        final String[] arguments = { "-f", "/home/CIT/dmarinho/ANALIZO/t/features/exemplo1.c", "-cfg", "/home/CIT/dmarinho/config.xml" };
+        final String filePath = this.getClass().getResource(PATH_FILE).getFile();
+        final String[] arguments = { PARAMETER_FILE, filePath };
         final CLInterface clInterface = new CLInterface(arguments);
         clInterface.parse();
     }
 
     @Test
-    public void testParseOptionUnknown() {
+    public void testParseOptionCfgFile() throws ParseException {
 
-        final String[] arguments = { "a" };
+        final String filePath = this.getClass().getResource(PATH_FILE).getFile();
+        final String[] arguments = { PARAMETER_FILE, filePath, PARAMETER_FILE_CONFIG, PATH_FILE_CONFIG };
+        final CLInterface clInterface = new CLInterface(arguments);
+        clInterface.parse();
+    }
+
+    @Test(expected = ParseException.class)
+    public void testParseOptionUnknown() throws ParseException {
+
+        final String[] arguments = { PARAMETER_FILE_NONEXISTENT };
         final CLInterface clInterface = new CLInterface(arguments);
         clInterface.parse();
     }
 
     @Test(expected = NullPointerException.class)
-    public void testParseOptionException() throws ParseException {
+    public void testParseOptionNullPointerException() throws ParseException {
 
         when(commandLineParserMock.parse(Mockito.anyObject(), Mockito.anyVararg())).thenThrow(Mockito.mock(NullPointerException.class));
 
         final CLInterface clInterface = new CLInterface(null);
         clInterface.parse();
-    }
-
-    @Test
-    public void testConfigurationFile() {
-
-        final String[] arguments = { "a", "b", "c" };
-        final CLInterface clInterface = new CLInterface(arguments);
-        final Multimap<Tool, Metric> configurationFile = clInterface.getMetricsPerTool();
-        assertNull(configurationFile);
     }
 
 }

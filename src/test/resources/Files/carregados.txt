@@ -1,2 +1,2 @@
-teste1.c
-teste2.c
+./src/test/resources/Files/test1.c
+./src/test/resources/Files/test2.c

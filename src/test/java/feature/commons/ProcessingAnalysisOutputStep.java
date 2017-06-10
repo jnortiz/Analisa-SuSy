@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.cli.ParseException;
 import org.junit.Assert;
 
 import com.google.common.collect.Multimap;
@@ -31,33 +32,32 @@ public class ProcessingAnalysisOutputStep {
         arguments = new String[2];
         arguments[0] = "-f";
         arguments[1] = "src/test/resources/Files/empty.txt";
-        File file = new File(arguments[1]);
-        
-        
-        try{
-	        BufferedReader br = new BufferedReader(new FileReader(file));
-	        try {
-	            StringBuilder sb = new StringBuilder();
-	            String line = br.readLine();
-	
-	            while (line != null) {
-	                sb.append(line);
-	                sb.append(System.lineSeparator());
-	                line = br.readLine();
-	            }
-	            Assert.assertTrue(sb.toString().equals(""));
-	        } finally {
-	            br.close();
-	        }
-		} catch (FileNotFoundException e) {
-			Assert.assertTrue(false);
-		} catch (IOException e) {
-			Assert.assertTrue(false);
-		}
+        final File file = new File(arguments[1]);
+
+        try {
+            final BufferedReader br = new BufferedReader(new FileReader(file));
+            try {
+                final StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+
+                while (line != null) {
+                    sb.append(line);
+                    sb.append(System.lineSeparator());
+                    line = br.readLine();
+                }
+                Assert.assertTrue(sb.toString().equals(""));
+            } finally {
+                br.close();
+            }
+        } catch (final FileNotFoundException e) {
+            Assert.assertTrue(false);
+        } catch (final IOException e) {
+            Assert.assertTrue(false);
+        }
     }
 
     @When("^The CCSM module returns from calling$")
-    public void suSyCallsAnalisaSuSy() {
+    public void suSyCallsAnalisaSuSy() throws ParseException {
         aCLI = new CLInterface(arguments);
         aCLI.parse();
         filepaths = aCLI.getFilepaths();
@@ -68,8 +68,7 @@ public class ProcessingAnalysisOutputStep {
 
     @Then("^The output should be empty as well$")
     public void analisaSuSyWontReturnErrorMessage() {
-    	Assert.assertEquals("",anOutput);
+        Assert.assertEquals("", anOutput);
     }
 
-    
 }

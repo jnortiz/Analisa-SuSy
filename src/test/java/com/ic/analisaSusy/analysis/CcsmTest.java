@@ -2,13 +2,11 @@ package com.ic.analisaSusy.analysis;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -21,7 +19,7 @@ public class CcsmTest {
 
     private static final String FILE_PATH_OUTPUT = "/bin/output";
 
-    private static final String FILE_PATH_INPUT = "/bin/input/list_of_algorithms";
+    private static final String FILE_PATH_INPUT = "/bin/carregados.txt";
 
     private static Ccsm ccsm;
 
@@ -43,7 +41,7 @@ public class CcsmTest {
 
         // THEN parse command will be executed
         assertNotNull(parseCommand);
-        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file /bin/input/list_of_algorithms  --", parseCommand);
+        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file " + FILE_PATH_INPUT + "  --", parseCommand);
     }
 
     @Test
@@ -57,7 +55,7 @@ public class CcsmTest {
 
         // THEN parse command will be executed
         assertNotNull(parseCommand);
-        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file /bin/input/list_of_algorithms  --", parseCommand);
+        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file " + FILE_PATH_INPUT + "  --", parseCommand);
     }
 
     @Test
@@ -66,7 +64,6 @@ public class CcsmTest {
         ccsm.parseOutput(FILE_PATH_OUTPUT);
     }
 
-    @Ignore
     @Test
     public void testRunTool() {
 
@@ -80,7 +77,7 @@ public class CcsmTest {
         final String output = ccsm.getOutput();
 
         // THEN parse command will be executed
-        assertNull(output);
+        assertNotNull(output);
     }
 
     @Test

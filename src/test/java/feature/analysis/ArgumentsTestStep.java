@@ -1,5 +1,6 @@
 package feature.analysis;
 
+import org.apache.commons.cli.ParseException;
 import org.junit.Assert;
 
 import com.ic.analisaSusy.commons.CLInterface;
@@ -28,7 +29,7 @@ public class ArgumentsTestStep {
     }
 
     @Then("^Analisa-SuSy won't return an error message$")
-    public void analisaSuSyWontReturnErrorMessage() {
+    public void analisaSuSyWontReturnErrorMessage() throws ParseException {
         aCLI.parse();
         Assert.assertTrue(aCLI.getFilepaths().size() > 0);
     }
@@ -47,11 +48,11 @@ public class ArgumentsTestStep {
 
     @Then("^Analisa-SuSy will return an error message$")
     public void analisaSuSyWillReturnErrorMessage() {
-    	try{
-    		aCLI.parse();
-    	} catch (Exception e) {
+        try {
+            aCLI.parse();
+        } catch (final Exception e) {
 
-		}
+        }
         Assert.assertTrue(aCLI.getFilepaths().size() == 0);
     }
 

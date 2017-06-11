@@ -41,7 +41,7 @@ public class CcsmTest {
 
         // THEN parse command will be executed
         assertNotNull(parseCommand);
-        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file " + FILE_PATH_INPUT + "  --", parseCommand);
+        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file -output-short-names " + FILE_PATH_INPUT + "  --", parseCommand);
     }
 
     @Test
@@ -55,13 +55,13 @@ public class CcsmTest {
 
         // THEN parse command will be executed
         assertNotNull(parseCommand);
-        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file " + FILE_PATH_INPUT + "  --", parseCommand);
+        assertEquals("ccsm --output-metrics=STMT_HIS_PARAM -exclude-std-headers -disable-file -output-short-names " + FILE_PATH_INPUT + "  --", parseCommand);
     }
 
     @Test
     public void testParseOutput() {
 
-     //   ccsm.parseOutput(FILE_PATH_OUTPUT);
+        // ccsm.parseOutput(FILE_PATH_OUTPUT);
     }
 
     @Test

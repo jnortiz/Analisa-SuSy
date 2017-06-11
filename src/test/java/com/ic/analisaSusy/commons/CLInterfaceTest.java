@@ -55,6 +55,15 @@ public class CLInterfaceTest {
         clInterface.parse();
     }
 
+    @Test
+    public void testFilepaths() throws ParseException {
+
+        final String filePath = this.getClass().getResource(PATH_FILE).getFile();
+        final String[] arguments = { PARAMETER_FILE, filePath, PARAMETER_FILE_CONFIG, PATH_FILE_CONFIG };
+        final CLInterface clInterface = new CLInterface(arguments);
+        clInterface.getFilepaths();
+    }
+
     @Test(expected = ParseException.class)
     public void testParseOptionUnknown() throws ParseException {
 

@@ -58,13 +58,27 @@ public class ParserTool {
 
     public static String generateOutput(final LinkedHashMap<String, LinkedHashMap<Metric, String>> structuredOutput) {
         final StringBuilder aStringBuilder = new StringBuilder();
+        String aFormatedDescription = "";
         for (final String aFunction : structuredOutput.keySet()) {
             aStringBuilder.append("Função:" + aFunction + System.getProperty("line.separator"));
             final HashMap<Metric, String> byFunctionOutput = structuredOutput.get(aFunction);
             for (final Metric aMetric : byFunctionOutput.keySet()) {
-                aStringBuilder.append("\t" + aMetric.getToolCode() + " = " + byFunctionOutput.get(aMetric) + System.getProperty("line.separator"));
+                aFormatedDescription = aMetric.getMetricDescription();
+                aFormatedDescription = String.format(aFormatedDescription, byFunctionOutput.get(aMetric));
+                aStringBuilder.append("\t");
+                aStringBuilder.append(aFormatedDescription);
+                aStringBuilder.append(System.getProperty("line.separator"));
             }
         }
+        aStringBuilder.append(System.getProperty("line.separator"));
+        aStringBuilder.append("Legenda:");
+        aStringBuilder.append(System.getProperty("line.separator"));
+        aStringBuilder.append("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        aStringBuilder.append(System.getProperty("line.separator"));
+        aStringBuilder.append("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+        aStringBuilder.append(System.getProperty("line.separator"));
+        aStringBuilder.append("Para mais informações sobre as métricas apresentadas acesse www.xxxxxxxx.br");
+        aStringBuilder.append(System.getProperty("line.separator"));;
         return aStringBuilder.toString().replace("Função:Global", "Global");
     }
 

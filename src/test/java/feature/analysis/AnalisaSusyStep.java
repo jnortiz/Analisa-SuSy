@@ -22,14 +22,15 @@ public class AnalisaSusyStep {
     private CLInterface aCLI;
     private List<String> filepaths;
     private String anOutput;
+    private final String FILENAME = CucumberConstant.PATH + "carregados.txt";
 
     private void setArgumments() {
     	arguments = new String[2];
     	arguments[0] = "-f";
-    	arguments[1] = "/home/jnortiz/git/Analisa-SuSy/carregados.txt";
+    	arguments[1] = FILENAME;
     }
         
-	/* Scenario: The input file "carregados.txt" exists and is not empty, and the analysis output is not empty */
+    /* Scenario: The input file "carregados.txt" exists and is not empty, and the analysis output is not empty */
     @Given("^A file containing a list of filenames$")
     public void receiveFile() throws Throwable {
     	this.setArgumments();
@@ -43,7 +44,7 @@ public class AnalisaSusyStep {
         Assert.assertTrue(aCLI.getFilepaths().isEmpty());
     }    
     
-    @Then("^Generate a string containing the concatenation of all files to be analysed$")
+    @Then("^Generate a string containing the concatenation of all files to be analyzed$")
     public void generateConcatenation() throws Throwable {
     	aCLI.parse();
         filepaths = aCLI.getFilepaths();

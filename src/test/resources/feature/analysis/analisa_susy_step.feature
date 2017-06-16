@@ -15,4 +15,4 @@ Given A file containing a list of filenames
 When Analisa-SuSy was called by SuSy
 Then Generate a string containing the concatenation of all files to be analyzed
 And Run the analysis tool passing all filenames as a single input
-And Generate an output containing the analysis result.
+And Generate an output containing the analysis result

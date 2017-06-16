@@ -125,15 +125,22 @@ public class ParserToolTest {
 
         // Function 1
         metrics.append("Função:1\n");
-        metrics.append("\tKW_BREAK_CNT = 10\n");
-        metrics.append("\tKW_CASE_CNT = 5\n");
-        metrics.append("\tCOMMENT_HIS_COMF = 2\n");
+        metrics.append("\tNúmero de ocorrências de 'break': 10\n");
+        metrics.append("\tNúmero de ocorrências de 'count': 5\n");
+        metrics.append("\tDensidade de comentários: 2\n");
 
         // Function 2
         metrics.append("Função:2\n");
-        metrics.append("\tVAR_FILE_LOC_CNT = 32\n");
-        metrics.append("\tSTMT_HIS_PARAM = 0\n");
-        metrics.append("\tFUNC_NESTING = 1\n");
+        metrics.append("\tNúmero de variáveis locais: 32\n");
+        metrics.append("\tNúmero de parâmetros da função: 0\n");
+        metrics.append("\tNível de aninhamento da função: 1\n");
+
+        // Legenda
+        metrics.append("\n");
+        metrics.append("Legenda:\n");
+        metrics.append("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+        metrics.append("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n");
+        metrics.append("Para mais informações sobre as métricas apresentadas acesse www.xxxxxxxx.br\n");
 
         return metrics.toString();
     }

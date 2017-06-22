@@ -15,15 +15,10 @@ import org.mockito.Mockito;
 public class CLInterfaceTest {
 
     private static final String PARAMETER_FILE_CONFIG = "-cfg";
-
     private static final String PARAMETER_FILE_NONEXISTENT = "a";
-
     private static final String PARAMETER_FILE = "-f";
-
     private static final String PATH_FILE = "/Files/carregados.txt";
-
     private static final String PATH_FILE_CONFIG = "/home/CIT/dmarinho/config.xml";
-
     private static final String PATH_FILE_NONEXISTENT = "/arquivoInexistente.txt";
 
     @Mock

@@ -18,9 +18,7 @@ import org.junit.Test;
 public class ErrorCheckingTest {
 
     private static final String PATH_FILE = "/Files/carregados.txt";
-
     private static final String PATH_FILE_1 = "/Files/test1.c";
-
     private static final String PATH_FILE_2 = "/Files/test1.c";
 
     @Test

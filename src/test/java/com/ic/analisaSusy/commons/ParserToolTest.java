@@ -18,11 +18,14 @@ import com.ic.analisaSusy.analysis.Tool;
  */
 public class ParserToolTest {
 
+    private static final String CODE_FILE = "123";
+    private static final String FILE_OUTPUT = "carregar.txt";
+    private static final String FILE_1 = "/bash/conf.xml";
+
     @Test
     public void testParseConfigFile() {
 
-        final String aConfigurationFile = "/bash/conf.xml";
-        final Multimap<Tool, Metric> parseConfigFile = ParserTool.parseConfigFile(aConfigurationFile);
+        final Multimap<Tool, Metric> parseConfigFile = ParserTool.parseConfigFile(FILE_1);
         assertNull(parseConfigFile);
     }
 
@@ -30,7 +33,7 @@ public class ParserToolTest {
     public void testParseError1() {
 
         final Multimap<ApplicationError, String> errors = ArrayListMultimap.create();
-        errors.put(ApplicationError.NF_INPUT, "carregar.txt");
+        errors.put(ApplicationError.NF_INPUT, FILE_OUTPUT);
         final String msgError = ParserTool.parseErrors(errors);
 
         assertEquals("O arquivo de entrada carregar.txt não foi encontrado.", msgError.trim());
@@ -40,7 +43,7 @@ public class ParserToolTest {
     public void testParseError2() {
 
         final Multimap<ApplicationError, String> errors = ArrayListMultimap.create();
-        errors.put(ApplicationError.NF_CODE, "123");
+        errors.put(ApplicationError.NF_CODE, CODE_FILE);
         final String msgError = ParserTool.parseErrors(errors);
 
         assertEquals("O arquivo de código 123 não foi encontrado.", msgError.trim());
@@ -70,7 +73,7 @@ public class ParserToolTest {
     public void testParseError5() {
 
         final Multimap<ApplicationError, String> errors = ArrayListMultimap.create();
-        errors.put(ApplicationError.INVALID_EXT, "123");
+        errors.put(ApplicationError.INVALID_EXT, CODE_FILE);
         final String msgError = ParserTool.parseErrors(errors);
 
         assertEquals("O arquivo de código 123 não pertence a linguagem C.", msgError.trim());
@@ -124,23 +127,19 @@ public class ParserToolTest {
         final StringBuffer metrics = new StringBuffer();
 
         // Function 1
-        metrics.append("Função:1\n");
-        metrics.append("\tNúmero de ocorrências de 'break': 10\n");
-        metrics.append("\tNúmero de ocorrências de 'count': 5\n");
-        metrics.append("\tDensidade de comentários: 2\n");
+        metrics.append("Função 1\n");
+        metrics.append("\tDensidade de comentários (> 0,2): 2\n");
 
         // Function 2
-        metrics.append("Função:2\n");
-        metrics.append("\tNúmero de variáveis locais: 32\n");
-        metrics.append("\tNúmero de parâmetros da função: 0\n");
-        metrics.append("\tNível de aninhamento da função: 1\n");
+        metrics.append("Função 2\n");
+        metrics.append("\tNúmero de variáveis globais: 32\n");
+        metrics.append("\tNúmero de parâmetros da função (0-5): 0\n");
+        metrics.append("\tNível de aninhamento da função (0-4): 1\n");
 
         // Legenda
         metrics.append("\n");
-        metrics.append("Legenda:\n");
-        metrics.append("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        metrics.append("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n");
-        metrics.append("Para mais informações sobre as métricas apresentadas acesse www.xxxxxxxx.br\n");
+        metrics.append(
+                "Para mais informações, acesse a <a href=\"https://github.com/jnortiz/Analisa-SuSy/wiki/Métricas\" target=\"_blank\" >página</a> que descreve as métricas acima.\n");
 
         return metrics.toString();
     }

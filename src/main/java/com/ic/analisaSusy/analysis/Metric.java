@@ -10,22 +10,21 @@ public enum Metric {
 //    WHILE_C(Tool.CCSM, "KW_WHILE_CNT"), 
 //    RETURN_C(Tool.CCSM, "KW_RETURN_CNT");
     FUNC_C(Tool.CCSM, "FUNC_CNT", "Número de funções: %s"),
-    CASE_C(Tool.CCSM, "KW_CASE_CNT", "Número de ocorrências de 'count': %s"),
+    CASE_C(Tool.CCSM, "KW_CASE_CNT", "Número de ocorrências de 'case': %s"),
     BREAK_C(Tool.CCSM, "KW_BREAK_CNT", "Número de ocorrências de 'break': %s"),
     GOTO_C(Tool.CCSM, "KW_GOTO_CNT", "Número de ocorrências de 'goto': %s"),
     CONTINUE_C(Tool.CCSM, "KW_CONTINUE_CNT", "Número de ocorrências de 'continue': %s"),
-    VAR_FILE_LOC_C(Tool.CCSM, "VAR_FILE_LOC_CNT", "Número de variáveis locais: %s"),
+    VAR_FILE_LOC_C(Tool.CCSM, "VAR_FILE_LOC_CNT", "Número de variáveis globais: %s"),
     RETURN_POINT_C(Tool.CCSM, "RETURN_POINT_CNT", "Número de ocorrências de 'return': %s"),
-    CMNT_DENS(Tool.CCSM, "COMMENT_HIS_COMF", "Densidade de comentários: %s"),
-    CC(Tool.CCSM, "MCCABE", "Complexidade ciclomática: %s"),
-    UNQ_FUNC_CALL(Tool.CCSM, "OP_FN_CALL_UNIQUE_CNT", "Número de chamadas únicas a funções: %s"),
-    PARAM_PER_FUNC(Tool.CCSM, "STMT_HIS_PARAM", "Número de parâmetros da função: %s"),
-    NESTING_FUNC_C(Tool.CCSM, "FUNC_NESTING", "Nível de aninhamento da função: %s"),
-    HAL_VOC(Tool.CCSM, "HALSTEAD_VOCABULARY", "Vocabulário de Halstead: %s"),
-    HAL_LEN(Tool.CCSM, "HALSTEAD_LENGTH", "Tamanho de Halstead: %s"),
-    HAL_CALC_LEN(Tool.CCSM, "HALSTEAD_CALC_LENGTH", "Vocabulário de Halstead: %s"),
-    HAL_VOL(Tool.CCSM, "HALSTEAD_VOLUME", "Volume de Halstead: %s"),
-    HAL_D(Tool.CCSM, "HALSTEAD_DIFFICULTY", "Dificuldade de Halstead: %s");
+    CMNT_DENS(Tool.CCSM, "COMMENT_HIS_COMF", "Densidade de comentários (> 0,2): %s"),
+    CC(Tool.CCSM, "MCCABE", "Complexidade em termos de caminhos independentes (1-10): %s"),
+    FUNC_CALLED_C(Tool.CCSM, "FUNC_CALLED_BY_LOCAL", "Número de chamadas para esta função (> 0): %s"),
+    PARAM_PER_FUNC(Tool.CCSM, "STMT_HIS_PARAM", "Número de parâmetros da função (0-5): %s"),
+    NESTING_FUNC_C(Tool.CCSM, "FUNC_NESTING", "Nível de aninhamento da função (0-4): %s"),
+    //HAL_VOC(Tool.CCSM, "HALSTEAD_VOCABULARY", "Vocabulário de Halstead: %s"),
+   // HAL_LEN(Tool.CCSM, "HALSTEAD_LENGTH", "Tamanho de Halstead: %s"),
+    HAL_VOL(Tool.CCSM, "HALSTEAD_VOLUME", "Tamanho da implementação (20-1000): %s"),
+    HAL_D(Tool.CCSM, "HALSTEAD_DIFFICULTY", "Propensão a erros: %s");
 
     private Tool tool;
     private String toolCode;

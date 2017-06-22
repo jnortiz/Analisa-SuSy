@@ -56,30 +56,36 @@ public class ParserTool {
 
     }
 
+    private static List<Metric> generateMetricFilter(){
+        List<Metric> aFilterList = new ArrayList<>();
+        aFilterList.add(Metric.BREAK_C);
+        aFilterList.add(Metric.CASE_C);
+        aFilterList.add(Metric.GOTO_C);
+        aFilterList.add(Metric.CONTINUE_C);
+        return aFilterList;
+    }
+    
     public static String generateOutput(final LinkedHashMap<String, LinkedHashMap<Metric, String>> structuredOutput) {
         final StringBuilder aStringBuilder = new StringBuilder();
         String aFormatedDescription = "";
+        List<Metric> aFilterList = ParserTool.generateMetricFilter();
         for (final String aFunction : structuredOutput.keySet()) {
-            aStringBuilder.append("Função:" + aFunction + System.getProperty("line.separator"));
+            aStringBuilder.append("Função " + aFunction + System.getProperty("line.separator"));
             final HashMap<Metric, String> byFunctionOutput = structuredOutput.get(aFunction);
             for (final Metric aMetric : byFunctionOutput.keySet()) {
+                if(!aFunction.equalsIgnoreCase("global") && aFilterList.contains(aMetric))
+                    continue;
                 aFormatedDescription = aMetric.getMetricDescription();
-                aFormatedDescription = String.format(aFormatedDescription, byFunctionOutput.get(aMetric));
+                aFormatedDescription = String.format(aFormatedDescription, byFunctionOutput.get(aMetric).replace(".",","));
                 aStringBuilder.append("\t");
                 aStringBuilder.append(aFormatedDescription);
                 aStringBuilder.append(System.getProperty("line.separator"));
             }
         }
         aStringBuilder.append(System.getProperty("line.separator"));
-        aStringBuilder.append("Legenda:");
-        aStringBuilder.append(System.getProperty("line.separator"));
-        aStringBuilder.append("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-        aStringBuilder.append(System.getProperty("line.separator"));
-        aStringBuilder.append("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-        aStringBuilder.append(System.getProperty("line.separator"));
-        aStringBuilder.append("Para mais informações sobre as métricas apresentadas acesse www.xxxxxxxx.br");
+        aStringBuilder.append("Para mais informações, acesse a <a href=\"https://github.com/jnortiz/Analisa-SuSy/wiki/Métricas\" target=\"_blank\" >página</a> que descreve as métricas acima.");
         aStringBuilder.append(System.getProperty("line.separator"));;
-        return aStringBuilder.toString().replace("Função:Global", "Global");
+        return aStringBuilder.toString().replace("Função Global", "Métricas globais");
     }
 
     public static String parseErrors(final Multimap<ApplicationError, String> errors) {

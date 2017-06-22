@@ -29,8 +29,8 @@ public class CcsmTest {
         // GIVEN a analise event
         ccsm = new Ccsm(Arrays.asList(FILE_PATH_INPUT),
                 Arrays.asList(Metric.FUNC_C, Metric.CASE_C, Metric.BREAK_C, Metric.GOTO_C, Metric.CONTINUE_C, Metric.VAR_FILE_LOC_C, Metric.RETURN_POINT_C,
-                        Metric.CMNT_DENS, Metric.CC, Metric.UNQ_FUNC_CALL, Metric.PARAM_PER_FUNC, Metric.NESTING_FUNC_C, Metric.HAL_VOC, Metric.HAL_LEN,
-                        Metric.HAL_CALC_LEN, Metric.HAL_D));
+                        Metric.CMNT_DENS, Metric.CC, /*Metric.UNQ_FUNC_CALL*/ Metric.PARAM_PER_FUNC, Metric.NESTING_FUNC_C, /*Metric.HAL_VOC, Metric.HAL_LEN,
+                        Metric.HAL_CALC_LEN,*/ Metric.HAL_D));
     }
 
     @Test
@@ -85,8 +85,8 @@ public class CcsmTest {
 
         // GIVEN a metrics
         final List<Metric> metrics = Arrays.asList(Metric.FUNC_C, Metric.CASE_C, Metric.BREAK_C, Metric.GOTO_C, Metric.CONTINUE_C, Metric.VAR_FILE_LOC_C,
-                Metric.RETURN_POINT_C, Metric.CMNT_DENS, Metric.CC, Metric.UNQ_FUNC_CALL, Metric.PARAM_PER_FUNC, Metric.NESTING_FUNC_C, Metric.HAL_VOC,
-                Metric.HAL_LEN, Metric.HAL_CALC_LEN, Metric.HAL_D);
+                Metric.RETURN_POINT_C, Metric.CMNT_DENS, Metric.CC,/* Metric.UNQ_FUNC_CALL,*/ Metric.PARAM_PER_FUNC, Metric.NESTING_FUNC_C, /*Metric.HAL_VOC,
+                Metric.HAL_LEN, Metric.HAL_CALC_LEN,*/ Metric.HAL_D);
 
         // WHEN parse command effect
         final String output = ccsm.metricsToString(metrics, SEPARATOR_TOKEN);

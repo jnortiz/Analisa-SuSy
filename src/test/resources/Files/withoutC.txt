@@ -1,2 +1,2 @@
-/home/danilo/codigo2/Analisa-SuSy/src/test/resources/Files/erro1.err
-/home/danilo/codigo2/Analisa-SuSy/src/test/resources/Files/erro2.err
+./src/test/resources/Files/erro1.err
+./src/test/resources/Files/erro2.err

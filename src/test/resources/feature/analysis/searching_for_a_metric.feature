@@ -7,10 +7,10 @@ When Analisa-SuSy analyze all files
 Then Output contains Número de funções
 
 @Runme
-Scenario: The metric 'number of count' exists
+Scenario: The metric 'number of case' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files
-Then Output contains Número de ocorrências de 'count'
+Then Output contains Número de ocorrências de 'case'
 
 @Runme
 Scenario: The metric 'number of breaks' exists
@@ -31,10 +31,10 @@ When Analisa-SuSy analyze all files
 Then Output contains Número de ocorrências de 'continue'
 
 @Runme
-Scenario: The metric 'number of local variable' exists
+Scenario: The metric 'number of global variable' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files
-Then Output contains Número de variáveis locais
+Then Output contains Número de variáveis globais
 
 @Runme
 Scenario: The metric 'density of comments' exists
@@ -52,13 +52,13 @@ Then Output contains Número de ocorrências de 'return'
 Scenario: The metric 'cyclomatic complexity' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files
-Then Output contains Complexidade ciclomática
+Then Output contains Complexidade em termos de caminhos independentes
 
 @Runme
 Scenario: The metric 'number of calls to function' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files
-Then Output contains Número de chamadas únicas a funções
+Then Output contains Número de chamadas para esta função
 
 @Runme
 Scenario: The metric 'number of parameters' exists
@@ -73,25 +73,13 @@ When Analisa-SuSy analyze all files
 Then Output contains Nível de aninhamento da função
 
 @Runme
-Scenario: The metric 'Halstead's vocabulary' exists
-Given The correct arguments and carregados.txt
-When Analisa-SuSy analyze all files
-Then Output contains Vocabulário de Halstead
-
-@Runme
-Scenario: The metric 'Halstead's size' exists
-Given The correct arguments and carregados.txt
-When Analisa-SuSy analyze all files
-Then Output contains Tamanho de Halstead
-
-@Runme
 Scenario: The metric 'volume of Halstead' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files
-Then Output contains Volume de Halstead
+Then Output contains Tamanho da implementação
 
 @Runme
 Scenario: The metric 'difficulty of Halstead' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files
-Then Output contains Dificuldade de Halstead
+Then Output contains Propensão a erros

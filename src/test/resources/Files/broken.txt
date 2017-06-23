@@ -1,1 +1,1 @@
-/home/danilo/codigo2/Analisa-SuSy/src/test/resources/Files/broken.c
+./src/test/resources/Files/broken.c

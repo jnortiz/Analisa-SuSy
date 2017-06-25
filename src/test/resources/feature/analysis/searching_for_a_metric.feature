@@ -37,12 +37,6 @@ When Analisa-SuSy analyze all files
 Then Output contains Número de variáveis globais
 
 @Runme
-Scenario: The metric 'density of comments' exists
-Given The correct arguments and carregados.txt
-When Analisa-SuSy analyze all files
-Then Output contains Densidade de comentários
-
-@Runme
 Scenario: The metric 'number of return' exists
 Given The correct arguments and carregados.txt
 When Analisa-SuSy analyze all files

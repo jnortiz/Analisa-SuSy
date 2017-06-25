@@ -16,7 +16,7 @@ public enum Metric {
     CONTINUE_C(Tool.CCSM, "KW_CONTINUE_CNT", "Número de ocorrências de 'continue': %s"),
     VAR_FILE_LOC_C(Tool.CCSM, "VAR_FILE_LOC_CNT", "Número de variáveis globais: %s"),
     RETURN_POINT_C(Tool.CCSM, "RETURN_POINT_CNT", "Número de ocorrências de 'return': %s"),
-    CMNT_DENS(Tool.CCSM, "COMMENT_HIS_COMF", "Densidade de comentários (> 0,2): %s"),
+    //CMNT_DENS(Tool.CCSM, "COMMENT_HIS_COMF", "Densidade de comentários (> 0,2): %s"),
     CC(Tool.CCSM, "MCCABE", "Complexidade em termos de caminhos independentes (1-10): %s"),
     FUNC_CALLED_C(Tool.CCSM, "FUNC_CALLED_BY_LOCAL", "Número de chamadas para esta função (> 0): %s"),
     PARAM_PER_FUNC(Tool.CCSM, "STMT_HIS_PARAM", "Número de parâmetros da função (0-5): %s"),

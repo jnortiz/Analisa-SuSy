@@ -46,9 +46,11 @@ public class ParserTool {
             throw new FileNotFoundException("Arquivo de entrada não encontrado");
         }
         final BufferedReader aBufferedReader = new BufferedReader(new FileReader(aFile));
-        String aFilepath;
+        String aFilepath="";
         while ((aFilepath = aBufferedReader.readLine()) != null) {
-            filepaths.add(aFilepath);
+            if(aFilepath.trim().isEmpty())
+                continue;
+            filepaths.add(aFilepath.trim());
         }
         filepaths = ErrorChecking.fileExistenceCheck(filepaths);
         filepaths = ErrorChecking.fileExtensionCheck(filepaths);

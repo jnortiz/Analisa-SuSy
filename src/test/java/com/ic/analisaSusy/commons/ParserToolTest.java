@@ -108,7 +108,7 @@ public class ParserToolTest {
         final LinkedHashMap<Metric, String> metricFunction1 = new LinkedHashMap<>();
         metricFunction1.put(Metric.BREAK_C, "10");
         metricFunction1.put(Metric.CASE_C, "5");
-        //metricFunction1.put(Metric.CMNT_DENS, "2");
+        // metricFunction1.put(Metric.CMNT_DENS, "2");
         structuredOutput.put("1", metricFunction1);
 
         // Function 2
@@ -128,7 +128,6 @@ public class ParserToolTest {
 
         // Function 1
         metrics.append("Função 1\n");
-        metrics.append("\tDensidade de comentários (> 0,2): 2\n");
 
         // Function 2
         metrics.append("Função 2\n");

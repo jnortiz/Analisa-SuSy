@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/jnortiz/Analisa-SuSy.svg?branch=master)](https://travis-ci.org/jnortiz/Analisa-SuSy)[![Stories in Ready](https://badge.waffle.io/jnortiz/Analisa-SuSy.png?label=ready&title=Ready)](https://waffle.io/jnortiz/Analisa-SuSy?utm_source=badge)
+[![Build Status](https://travis-ci.org/jnortiz/Analisa-SuSy.svg?branch=master)](https://travis-ci.org/jnortiz/Analisa-SuSy)
+[![Stories in Ready](https://badge.waffle.io/jnortiz/Analisa-SuSy.png?label=ready&title=Ready)](https://waffle.io/jnortiz/Analisa-SuSy?utm_source=badge)
 
 # Analisa-SuSy
 
